@@ -5,7 +5,7 @@ import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import * as geolib from "geolib";
 import { display, height } from "@mui/system";
-import MapIcon from "@mui/icons-material/Map";
+import AssistantDirectionSharpIcon from "@mui/icons-material/AssistantDirectionSharp";
 import Map from "../components/map";
 
 export const ShowBeds = () => {
@@ -15,6 +15,7 @@ export const ShowBeds = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const [activeButton, setActiveButton] = useState(0);
 
   const [currLocation, setCurrLocation] = useState({
     latitude: 0,
@@ -64,8 +65,19 @@ export const ShowBeds = () => {
   const handleDelete = (id) => {
     navigate("/delete", { state: { id: id } });
   };
-  const handleMapClick = () => {
-    navigate("/map", { state: { location: currLocation } });
+
+  const handlePageChange = (page) => {
+    setCurrPage(page);
+    setActiveButton(page - 1);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleMapClick = (dest) => {
+    navigate("/map", { state: { location: currLocation, dest: dest } });
   };
 
   if (loading) {
@@ -101,14 +113,6 @@ export const ShowBeds = () => {
   const endIndex = startIndex + itemsPerPage;
   const currItems = beds.slice(startIndex, endIndex);
   const totalPages = Math.ceil(beds.length / itemsPerPage);
-  const handlePageChange = (page) => {
-    setCurrPage(page);
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
 
   return (
     <div style={styles.container}>
@@ -147,10 +151,16 @@ export const ShowBeds = () => {
                   {bed.location
                     ? `${distanceInKilometers} kms away`
                     : "Location unavailable"}
+
+                  <div
+                    style={{ cursor: "pointer" }}
+                    onClick={() => {
+                      handleMapClick(bed.location);
+                    }}
+                  >
+                    <AssistantDirectionSharpIcon />
+                  </div>
                 </h5>
-                <div style={{ cursor: "pointer" }} onClick={handleMapClick}>
-                  <MapIcon />
-                </div>
               </span>
               <p style={styles.text}>Beds Available: {bed.no_of_beds}</p>
               <p style={styles.text}>Price: ${bed.price}</p>
@@ -191,7 +201,13 @@ export const ShowBeds = () => {
         {Array.from({ length: totalPages }).map((k, index) => {
           return (
             <button
-              style={{ ...styles.button, backgroundColor: "#4682B4" }}
+              style={{
+                ...styles.button,
+                backgroundColor:
+                  activeButton === index
+                    ? "rgb(102, 153, 153)"
+                    : "rgb(0, 128, 128)",
+              }}
               key={index}
               onClick={() => handlePageChange(index + 1)}
             >
