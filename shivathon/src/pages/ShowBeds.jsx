@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import * as geolib from "geolib";
 import { display, height } from "@mui/system";
+import MapIcon from "@mui/icons-material/Map";
+import Map from "../components/map";
 
 export const ShowBeds = () => {
   const itemsPerPage = 5;
@@ -14,8 +16,6 @@ export const ShowBeds = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  console.log(beds)
-
   const [currLocation, setCurrLocation] = useState({
     latitude: 0,
     longitude: 0,
@@ -24,16 +24,17 @@ export const ShowBeds = () => {
   const isAdmin = localStorage.getItem("token") || null;
 
   const getCurrLocation = () => {
-    navigator.geolocation.getCurrentPosition(
+    navigator.geolocation.watchPosition(
       (position) => {
         setCurrLocation({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
+          // latitude: 30.10778,
+          // longitude: 78.29255,
         });
-        console.log("Current Location:", position.coords);
       },
       (err) => console.error("Error getting current location:", err),
-      { enableHighAccuracy: true }
+      { enableHighAccuracy: false, timeout: 8000 }
     );
   };
 
@@ -50,7 +51,7 @@ export const ShowBeds = () => {
         setError("Failed to load data.");
         setLoading(false);
       });
-  }, []);
+  }, [currLocation]);
 
   const handleBookClick = () => {
     // Implement booking logic here
@@ -62,6 +63,9 @@ export const ShowBeds = () => {
 
   const handleDelete = (id) => {
     navigate("/delete", { state: { id: id } });
+  };
+  const handleMapClick = () => {
+    navigate("/map", { state: { location: currLocation } });
   };
 
   if (loading) {
@@ -93,12 +97,17 @@ export const ShowBeds = () => {
 
   if (error) return <div style={styles.error}>{error}</div>;
 
-  const startIndex = (currPage-1)* itemsPerPage;
+  const startIndex = (currPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const currItems = beds.slice(startIndex, endIndex);
   const totalPages = Math.ceil(beds.length / itemsPerPage);
   const handlePageChange = (page) => {
     setCurrPage(page);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -139,6 +148,9 @@ export const ShowBeds = () => {
                     ? `${distanceInKilometers} kms away`
                     : "Location unavailable"}
                 </h5>
+                <div style={{ cursor: "pointer" }} onClick={handleMapClick}>
+                  <MapIcon />
+                </div>
               </span>
               <p style={styles.text}>Beds Available: {bed.no_of_beds}</p>
               <p style={styles.text}>Price: ${bed.price}</p>

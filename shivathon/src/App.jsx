@@ -14,6 +14,7 @@ import { Footer } from "./components/Footer.jsx";
 import { Login } from "./pages/Login.jsx";
 import { Signup } from "./pages/Signup.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
+import Map from "./components/map.jsx";
 
 export const App = () => {
   return (
@@ -28,6 +29,7 @@ export const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/adminpage" element={<AdminPage />} />
+          <Route path="/map" element={<Map />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>

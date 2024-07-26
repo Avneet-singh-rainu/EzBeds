@@ -119,19 +119,20 @@ export const Navbar = () => {
           </a>
 
           {isAdmin && (
-            <Link to="/add" style={editIconStyle}>
-              <EditIcon />
-            </Link>
+            <>
+              <Link to="/add" style={editIconStyle}>
+                <EditIcon />
+              </Link>
+              <Tooltip title="Logout">
+                <div
+                  style={{ ...editIconStyle, cursor: "pointer" }}
+                  onClick={handleLogOut}
+                >
+                  <LogoutIcon />
+                </div>
+              </Tooltip>
+            </>
           )}
-
-          <Tooltip title="Logout">
-            <div
-              style={{ ...editIconStyle, cursor: "pointer" }}
-              onClick={handleLogOut}
-            >
-              <LogoutIcon />
-            </div>
-          </Tooltip>
         </div>
       </nav>
       <Outlet />
