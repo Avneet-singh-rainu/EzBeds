@@ -1,0 +1,255 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100&family=Ubuntu:wght@300&display=swap');
+
+
+*{
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
+}
+
+
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(51, 44, 44);
+  color: rgb(43, 45, 47);
+  background-color: #e9ecef;
+  font-weight: 500;
+  font-size: 25px;
+  
+}
+
+input{
+  font-family:Verdana, Geneva, Tahoma, sans-serif !important;
+  font: 500 !important;
+  font-size: 20px !important;
+}
+
+li{
+  text-decoration: none;
+  list-style-type: none;
+  margin: 0 20px;
+}
+
+img{
+  object-fit: cover;
+  width: auto;
+  height: 460px;
+}
+
+button{
+  background: #28a745;
+  height: 50px;
+  width: 100%;
+
+  border: none;
+
+
+}
+
+
+
+.nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #242424;
+  height: 80px;
+  width: 100vw;
+box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+
+}
+
+.logo{  
+  
+  margin-left: 30px;
+}
+
+ul{
+  display: flex;
+}
+
+
+
+.icons{ 
+  margin: 10px;
+  color:#242424;
+}
+
+
+.icons:hover{
+  color: rgb(41, 92, 137);
+}
+
+.form{
+  
+width: fit-content;
+margin: auto;  
+  min-height: fit-content;
+  
+  padding: 100px;
+
+  border-radius: 20px;
+
+  margin-top: 300px;
+
+  background-color: #5f6fe9;
+box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.text-deco{
+  color:#242424;
+  text-decoration: none;
+}
+
+.text-deco:hover{
+  color: #242424;
+  text-decoration: none;
+}
+
+.form-container{
+  background-color: #a4d4f0;
+  display: flex;
+  margin: auto ;
+  margin-top: 250px;
+  width: fit-content;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px #242424;
+}
+
+.container{
+  width: 98vw;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 40px;
+  font-weight: 800;
+
+}
+
+
+
+
+.left{
+  margin-left: 100px;
+  width:70%;
+  height:400px;
+}
+
+.hospitalinfo{
+  display: flex;
+  flex-direction:column ;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+
+
+.hospitalname  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+  margin-bottom: 20px;
+}
+
+.btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px;
+}
+
+.cross:hover{
+background-color: #ef6eae;
+}
+
+.delete-btn{
+  display: flex;
+  flex-direction: column;
+gap: 30px;}
+
+
+
+
+.footer{
+  margin-top: 30vh;
+  background-color: #777;
+  width: 100vw;
+  height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.footer-left
+{
+  padding: 30px;
+  width:480px;
+  
+}
+
+.footer-right ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+
+
+.loader{
+ width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  
+ 
+
+}
+
+@media only screen and (max-width: 600px) {
+ 
+  .nav{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #242424;
+  height: 80px;
+  width: 100vw;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+
+
+}
+
+.icons{
+  display: none;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 20vh;
+}
+
+
+img{
+  width: 80px;
+  height: 80px;
+}
+
+.img{
+  margin-top: 20vh;
+}
+  
+}
